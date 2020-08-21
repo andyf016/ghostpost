@@ -16,6 +16,9 @@ def post_form_view(request):
                 post_content=data.get('post_content'),
             )
             return HttpResponseRedirect(reverse('home'))
+            # return HttpResponseRedirect(request.POST.get('next', '/'))
+            # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            # this was not working properly, I am going to keep looking into it
     form = PostForm()
 
     return render(request, 'generic_form.html', {'form': form})
