@@ -35,11 +35,11 @@ def downvote_view(request, post_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def boast_view(request):
-    boasts = Post.objects.filter(boast=True)
+    boasts = Post.objects.filter(boast=True).order_by('-time_stamp')
     return render(request, 'index.html', {"posts": boasts})
 
 def roast_view(request):
-    roasts = Post.objects.filter(boast=False)
+    roasts = Post.objects.filter(boast=False).order_by('-time_stamp')
     return render(request, 'index.html', {"posts": roasts})
 
 def sorted_view(request):
