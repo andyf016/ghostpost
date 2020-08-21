@@ -5,8 +5,8 @@ class Post(models.Model):
     BOOL_CHOICES = ((True, 'Boast'), (False, 'Roast'))
     boast = models.BooleanField(choices=BOOL_CHOICES, default=False)
     post_content = models.CharField(max_length=140)
-    up_votes = models.IntegerField()
-    down_votes = models.IntegerField()
+    up_votes = models.IntegerField(default=0)
+    down_votes = models.IntegerField(default=0)
     total_votes = models.IntegerField(default=0)
     time_stamp = models.DateTimeField(default=timezone.now)
 

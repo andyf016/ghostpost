@@ -14,22 +14,25 @@ def post_form_view(request):
             Post.objects.create(
                 boast=data.get('sentiment'),
                 post_content=data.get('post_content'),
-                up_votes=0,
-                down_votes=0,
             )
-        return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('home'))
     form = PostForm()
 
     return render(request, 'generic_form.html', {'form': form})
 
+# in both upvote and downvote views I am modifying 2 atributes, total and up or down
+# total is the only one rendered to the screen as per the demo but the rubric asks
+# for an up vote and down vote atribute so they are included
 def upvote_view(request, post_id):
     current_post = Post.objects.get(id=post_id)
+    current_post.up_votes += 1
     current_post.total_votes += 1
     current_post.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def downvote_view(request, post_id):
     current_post = Post.objects.get(id=post_id)
+    current_post.down_votes += 1
     current_post.total_votes -= 1
     current_post.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -43,5 +46,5 @@ def roast_view(request):
     return render(request, 'index.html', {"posts": roasts})
 
 def sorted_view(request):
-    all_posts = Post.objects.all().order_by('-total_votes')
+    all_posts = Post.objects.all().order_by('-total_votes', '-time_stamp')
     return render(request, 'index.html', {"posts": all_posts})
