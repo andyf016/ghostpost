@@ -15,7 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from ghostapp import views
 
 urlpatterns = [
+    path('', views.index, name='home'),
+    path('newpost/', views.post_form_view, name='newpost'),
+    path('boasts/', views.boast_view, name='boasts'),
+    path('roasts/', views.roast_view, name='roasts'),
+    path('upvote/<int:post_id>/', views.upvote_view, name='upvote'),
+    path('downvote/<int:post_id>/', views.downvote_view, name='downvote'),
     path('admin/', admin.site.urls),
 ]
+"""
+admin/
+index/
+boasts/
+roasts/
+add-post/
+upvote/ <int:id>
+downvote/<int:id>
+sorted/ 
+posts/<str:id>
+"""
