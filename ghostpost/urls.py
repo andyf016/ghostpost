@@ -22,6 +22,7 @@ urlpatterns = [
     path('newpost/', views.post_form_view, name='newpost'),
     path('boasts/', views.boast_view, name='boasts'),
     path('roasts/', views.roast_view, name='roasts'),
+    path('sorted/', views.sorted_view, name='sorted'),
     path('upvote/<int:post_id>/', views.upvote_view, name='upvote'),
     path('downvote/<int:post_id>/', views.downvote_view, name='downvote'),
     path('admin/', admin.site.urls),

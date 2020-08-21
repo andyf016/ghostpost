@@ -7,7 +7,7 @@ class Post(models.Model):
     post_content = models.CharField(max_length=140)
     up_votes = models.IntegerField()
     down_votes = models.IntegerField()
-    # total_votes = models.IntegerField()
+    total_votes = models.IntegerField(default=0)
     time_stamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

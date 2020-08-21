@@ -4,6 +4,8 @@
     <h3>BOASTS</h3>
 {% elif request.get_full_path == "/roasts/" %}
     <h3>ROASTS</h3>
+{% elif request.get_full_path == "/sorted/" %}
+    <h3>Most Popular</h3>
 {% endif %}
 {% for post in posts %}
 <div style="border:solid black">
@@ -11,9 +13,9 @@
     <br>
     {{post.boast}}
     <br>
-    UP VOTES {{post.up_votes}} <a href="/upvote/{{post.id}}">click</a>
+    Popularity: {{post.total_votes}}
     <br>
-    DOWN VOTES{{post.down_votes}} <a href="/downvote/{{post.id}}">click</a>
+    <a href="/upvote/{{post.id}}">Up Vote</a>   |   <a href="/downvote/{{post.id}}">Down Vote</a>
     <br>
     {{post.time_stamp}}
 </div>

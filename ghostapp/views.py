@@ -24,13 +24,13 @@ def post_form_view(request):
 
 def upvote_view(request, post_id):
     current_post = Post.objects.get(id=post_id)
-    current_post.up_votes += 1
+    current_post.total_votes += 1
     current_post.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def downvote_view(request, post_id):
     current_post = Post.objects.get(id=post_id)
-    current_post.down_votes += 1
+    current_post.total_votes -= 1
     current_post.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -41,3 +41,7 @@ def boast_view(request):
 def roast_view(request):
     roasts = Post.objects.filter(boast=False)
     return render(request, 'index.html', {"posts": roasts})
+
+def sorted_view(request):
+    all_posts = Post.objects.all().order_by('-total_votes')
+    return render(request, 'index.html', {"posts": all_posts})
