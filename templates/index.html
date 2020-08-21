@@ -1,9 +1,9 @@
 <a href='/'>home</a> | <a href='/boasts/'>boasts</a> | <a href='/roasts/'>roasts</a> | <a href="/newpost">New Post</a>
 <h1>GhostPost</h1>
 {% if request.get_full_path == "/boasts/"%}
-    <h3>BOASTS</h3>
+    <h3>Boasts</h3>
 {% elif request.get_full_path == "/roasts/" %}
-    <h3>ROASTS</h3>
+    <h3>Roasts</h3>
 {% elif request.get_full_path == "/sorted/" %}
     <h3>Most Popular</h3>
 {% endif %}
@@ -11,7 +11,11 @@
 <div style="border:solid black">
     {{post.post_content}}
     <br>
-    {{post.boast}}
+    {% if post.boast %}
+        Boast
+    {% else %}
+        Roast
+    {% endif %}
     <br>
     Popularity: {{post.total_votes}}
     <br>
